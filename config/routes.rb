@@ -1,5 +1,8 @@
 Rainforest::Application.routes.draw do
   
+  get "reviews/show"
+  get "reviews/new"
+  get "reviews/edit"
   get "sessions/new"
   get "sessions/create"
   get "sessions/destroy"
@@ -18,9 +21,14 @@ Rainforest::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-    resources :products
+    resources :products do
+      resources :reviews, except: [:index]
+    end
+    # resources :products
     resources :users, only: [:new, :create]
     resources :sessions, only: [:new, :create, :destroy]
+
+
   # Example resource route with options:
   #   resources :products do
   #     member do
